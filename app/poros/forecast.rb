@@ -1,6 +1,9 @@
 class Forecast
+  attr_reader :id
+
   def initialize(params)
     @params = params
+    @id = 1
   end
 
   def today

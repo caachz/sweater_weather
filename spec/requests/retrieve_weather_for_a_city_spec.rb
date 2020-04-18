@@ -7,23 +7,10 @@ describe "Retrieve weather for a city" do
     expect(response).to be_successful
 
     json = JSON.parse(response.body)
-    
-    #now: temp now, high temp, low temp, description, feels like, humidity, visibility, uv index, sunrise, sunset
-    today_temp_now = json["current"]["temp"]
-    today_high_temp = json["daily"][0]["temp"]["max"]
-    today_low_temp = json["daily"][0]["temp"]["min"]
-    today_description = json["current"]["weather"][0]["description"]
-    today_feels_like = json["current"]["feels_like"]
-    today_humidity = json["current"]["humidity"]
-    today_visibilty = json["current"]["visibility"]
-    today_uv_index = json["current"]["uvi"]
-    today_sunrise = json["current"]["sunrise"]
-    today_sunset = json["current"]["sunset"]
 
-    #8 hours of weather: time, description, temp
-    hourly = json["hourly"][0..7]
-    #5 days of weather: description, mm of rain, high temp, low temp
-    daily = json["daily"][0..4]
-    # expect(json["data"].count).to eq(3)
+    expect(json["data"].length).to eq(3)
+    expect(json["data"]["attributes"]["today"].length).to eq(10)
+    expect(json["data"]["attributes"]["hourly"].length).to eq(8)
+    expect(json["data"]["attributes"]["daily"].length).to eq(5)
   end
 end
