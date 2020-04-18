@@ -3,7 +3,7 @@ class Forecast
 
   def initialize(params)
     @params = params
-    @id = 1
+    @id = params[:timezone]
   end
 
   def today
