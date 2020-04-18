@@ -7,7 +7,6 @@ describe "Retrieve weather for a city" do
     expect(response).to be_successful
 
     json = JSON.parse(response.body)
-    require "pry"; binding.pry
 
     #now: temp now, high temp, low temp, description, feels like, humidity, visibility, uv index, sunrise, sunset
     today_temp_now = json["current"]["temp"]
