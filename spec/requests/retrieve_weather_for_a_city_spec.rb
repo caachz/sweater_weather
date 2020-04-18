@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Retrieve weather for a city" do
+describe "GET request to /api/v1/forecast?location=denver,co" do
   it "returns the weather based on city and state input" do
     get '/api/v1/forecast?location=denver,co'
 

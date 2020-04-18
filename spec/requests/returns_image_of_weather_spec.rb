@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe "Returns the image related to the current weather" do
-  it "returns the correct image" do
+describe "GET request to /api/v1/backgrounds?location=denver,co" do
+  it "returns an image of the location" do
 
     get '/api/v1/backgrounds?location=denver,co'
 
