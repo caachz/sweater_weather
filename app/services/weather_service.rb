@@ -2,6 +2,7 @@ class WeatherService
   def initialize(lat, lng)
     @lat = lat
     @lng = lng
+    @forecast = Forecast.new(parse_json)
   end
 
   def conn
@@ -14,6 +15,6 @@ class WeatherService
 
   def parse_json
     response = get
-    JSON.parse(response.body, symbolize_names: true)
+    json = JSON.parse(response.body, symbolize_names: true)
   end
 end
