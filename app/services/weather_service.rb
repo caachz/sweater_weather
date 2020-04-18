@@ -1,4 +1,6 @@
 class WeatherService
+  attr_reader :forecast
+  
   def initialize(lat, lng)
     @lat = lat
     @lng = lng
