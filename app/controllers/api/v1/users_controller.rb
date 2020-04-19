@@ -7,7 +7,7 @@ class Api::V1::UsersController < ApplicationController
     if user.save
       render json: user.as_json(only: [:id, :email, :authentication_token]), status: :created
     else
-      head(:unauthorized)
+      render :json => { :errors => "user cannot be created with these credentials" }, :status => 401
     end
   end
 end

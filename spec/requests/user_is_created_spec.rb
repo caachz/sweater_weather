@@ -27,5 +27,6 @@ describe "A post request to /api/v1/users" do
     expect(response.response_code).to eq 401
 
     expect(User.all.length).to eq(0)
+    expect(response.body).to eq("{\"errors\":\"user cannot be created with these credentials\"}")
   end
 end
