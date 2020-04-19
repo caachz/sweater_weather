@@ -4,9 +4,9 @@ describe "A post request to /api/v1/users" do
   it "creates a new user" do
     expect(User.all.length).to eq(0)
 
-    post '/api/v1/users', :params => {"email": "whatever@example.com",
-                                      "password": "password"
-                                      "password_confirmation": "password"}                                     
+    post '/api/v1/users', :params => {email: "whatever@example.com",
+                                      password: "password",
+                                      password_confirmation: "password"}
 
     expect(response).to be_successful
 
