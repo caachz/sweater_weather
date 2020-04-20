@@ -18,6 +18,25 @@ class Api::V1::AntipodesController < ApplicationController
     antipod_weather_json = JSON.parse(antipod_weather_result.body, symbolize_names: true)
     antipod_summary = antipod_weather_json[:current][:weather][0][:description]
     antipod_current_temp = antipod_weather_json[:current][:temp]
-    require "pry"; binding.pry
+
+    antipod_name = Faraday.new(url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=#{antipod_lat},#{antipod_lng}&key=#{ENV["GOOGLE_API_KEY"]}")
+    antipod_name_result = antipod_name.get
+    antipod_name_json = JSON.parse(antipod_name_result.body, symbolize_names: true)
+    antipod_name = antipod_name_json[:results][0][:address_components][1][:long_name] + ', ' + antipod_name_json[:results][0][:address_components][-1][:long_name]
+
+    render json: {
+    "data": {
+        "id": "null",
+        "type": "antipode",
+        "attributes": {
+            "location_name": antipod_name,
+            "forecast": {
+                "summary": antipod_summary,
+                "current_temperature": antipod_current_temp,
+            },
+            "search_location": params["location"]
+        }
+    }
+}
   end
 end

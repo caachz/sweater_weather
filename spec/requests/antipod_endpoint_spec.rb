@@ -8,7 +8,7 @@ describe "GET request to /api/v1/antipode?location=<start_location_city_name>" d
     expect(response).to be_successful
 
     json = JSON.parse(response.body)
-
+    require "pry"; binding.pry
     # expect(json["data"].length).to eq(3)
     # expect(json["data"]["attributes"]["today"].length).to eq(10)
     # expect(json["data"]["attributes"]["hourly"].length).to eq(8)
