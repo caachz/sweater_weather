@@ -8,6 +8,13 @@ class Api::V1::AntipodesController < ApplicationController
     origin_lat = origin_coordinates_json[:results][0][:geometry][:location][:lat]
     origin_lng = origin_coordinates_json[:results][0][:geometry][:location][:lng]
 
-    require "pry"; binding.pry
+    antipode_city = Faraday.new(url: "http://amypode.herokuapp.com/api/v1/antipodes?lat=#{origin_lat}&long=#{origin_lng}")
+
+    antipod_result = antipode_city.get('', {}, {api_key: ENV["AMYPODE_API_KEY"]})
+    antipod_json = JSON.parse(antipod_result.body, symbolize_names: true)
+    antipod_lat = antipod_json[:data][:attributes][:lat]
+    antipod_lng = antipod_json[:data][:attributes][:long]
+
+    
   end
 end
