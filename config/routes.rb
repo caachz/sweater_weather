@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resource :users, only: [:create]
       resource :sessions, only: [:create]
       resource :road_trip, only: [:create]
+      resource :antipode, only: [:show]
     end
   end
 
