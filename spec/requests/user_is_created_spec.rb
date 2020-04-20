@@ -7,7 +7,7 @@ describe "A post request to /api/v1/users" do
 
     params = {email: "whatever@example.com", password: "password", password_confirmation: "password"}
 
-    post '/api/v1/users', params: params.to_json
+    post '/api/v1/users', params: params
 
     expect(response).to be_successful
 
@@ -22,7 +22,7 @@ describe "A post request to /api/v1/users" do
 
     params = {email: "whatever@example.com", password: "password", password_confirmation: "passrrword"}
 
-    post '/api/v1/users', params: params.to_json
+    post '/api/v1/users', params: params
 
     expect(response.response_code).to eq 401
 

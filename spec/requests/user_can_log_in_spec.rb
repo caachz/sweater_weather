@@ -7,14 +7,14 @@ describe "A post request to /api/v1/sessions" do
 
     params = {email: "whatever@example.com", password: "password"}
 
-    post '/api/v1/sessions', params: params.to_json
+    post '/api/v1/sessions', params: params
 
     expect(response).to be_successful
 
     json = JSON.parse(response.body)
 
-    expect(json["email"]).to_not be_empty
-    expect(json["authentication_token"]).to_not be_empty
+    expect(json["data"]["attributes"]["email"]).to_not be_empty
+    expect(json["data"]["attributes"]["authentication_token"]).to_not be_empty
   end
 
   it 'does not log in a user if they are not valid' do
@@ -22,7 +22,7 @@ describe "A post request to /api/v1/sessions" do
 
     params = {email: "whatever@example.com", password: "ilovepuppies"}
 
-    post '/api/v1/sessions', params: params.to_json
+    post '/api/v1/sessions', params: params
 
     expect(response.response_code).to eq 401
 
