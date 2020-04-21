@@ -14,7 +14,7 @@ class Api::V1::RoadTripsController < ApplicationController
       if user
         @current_user = user
       else
-        render status: 401
+        render :json => { :errors => "unauthorized" }, :status => 401
       end
     end
 end
