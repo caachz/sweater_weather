@@ -8,10 +8,6 @@ class AmypodeService
     @lng = get_data[:data][:attributes][:long]
   end
 
-  # def coordinates
-  #   "#{@lat}, #{@lng}"
-  # end
-
   def conn
     Faraday.new(url: "http://amypode.herokuapp.com/api/v1/antipodes?lat=#{@origin_lat}&long=#{@origin_lng}")
   end
