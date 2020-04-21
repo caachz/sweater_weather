@@ -16,11 +16,13 @@ class RoadtripFacade
   end
 
   def arrival_forecast
-    geocode = GeocodingService.new(@destination)
-    geocode.geocode_conn
-    lat = geocode.lat
-    lng = geocode.lng
+    geocode = GeocodingService.new
+    info = geocode.geocode_conn(@destination)
+    location = Location.new(geocode.location_info(info))
 
-    weather = WeatherService.new(lat, lng).arrival_forecast(distance.distance_value)
+    weather = WeatherService.new(location.lat, location.lng)
+
+    forecast = Forecast.new(weather.get_forecast)
+    forecast.arrival_forecast(distance.distance_value)
   end
 end

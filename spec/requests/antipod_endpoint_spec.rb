@@ -10,7 +10,6 @@ describe "GET request to /api/v1/antipode?location=<start_location_city_name>" d
     json = JSON.parse(response.body)
 
     expect(json["data"]["attributes"]["forecast"].length).to eq(2)
-
     expect(json["data"]["attributes"]["forecast"]["summary"]).to_not be_empty
     expect(json["data"]["attributes"]["location_name"]).to_not be_empty
     expect(json["data"]["attributes"]["search_location"]).to_not be_empty
