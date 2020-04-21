@@ -4,24 +4,32 @@ class DirectionsService
     @destination = destination
   end
 
-  def conn
-    Faraday.new(url: "https://maps.googleapis.com/maps/api/directions/json?origin=#{@origin}&destination=#{@destination}&key=#{ENV['GOOGLE_API_KEY']}")
-  end
-
-  def get
-    conn.get
-  end
-
-  def parse_json
-    response = get
-    json = JSON.parse(response.body, symbolize_names: true)
-  end
-
   def distance_text
-    parse_json[:routes][0][:legs][0][:duration][:text]
+    get_json[:routes][0][:legs][0][:duration][:text]
   end
 
   def distance_value
-    parse_json[:routes][0][:legs][0][:duration][:value]
+    get_json[:routes][0][:legs][0][:duration][:value]
   end
+
+  private
+    def connection
+      Faraday.new(url: 'https://maps.googleapis.com') do |faraday|
+        faraday.params["key"] = ENV["GOOGLE_API_KEY"]
+      end
+    end
+
+    def get_directions
+      response = connection.get("maps/api/directions/json") do |f|
+        f.params["origin"] = @origin
+        f.params["destination"] = @destination
+        f.params["key"] = ENV['GOOGLE_API_KEY']
+      end
+    end
+
+    def get_json
+      response = get_directions
+
+      JSON.parse(response.body, symbolize_names: true)
+    end
 end
