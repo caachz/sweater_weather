@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe "GET request to /api/v1/antipode?location=<start_location_city_name>" do
-  it "returns the weather name and temp of the antipode of a location" do
+  xit "returns the weather name and temp of the antipode of a location" do
 
     get "/api/v1/antipode?location=hongkong"
 

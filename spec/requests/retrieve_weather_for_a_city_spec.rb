@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe "GET request to /api/v1/forecast?location=denver,co" do
-  it "returns the weather based on city and state input" do
+  xit "returns the weather based on city and state input" do
     get '/api/v1/forecast?location=denver,co'
 
     expect(response).to be_successful
